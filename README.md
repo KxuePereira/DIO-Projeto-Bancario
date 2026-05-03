@@ -1,65 +1,50 @@
-Banco Simulado
-Este é um projeto simples de simulação de operações bancárias, implementado durante o Bootcamp da DIO. O sistema permite realizar depósitos, saques, extratos e a criação de contas e usuários. A aplicação foi feita em Python e tem o objetivo de mostrar como um banco digital básico pode ser estruturado, simulando funcionalidades comuns de uma conta bancária.
+# 💰 Sistema Bancário Funcional - DIO
 
-Funcionalidades
-O projeto oferece um menu interativo que permite realizar as seguintes operações:
+Este projeto é uma simulação de operações bancárias desenvolvida durante o **Bootcamp da DIO (Digital Innovation One)**. O sistema utiliza o paradigma de programação funcional em Python para gerenciar usuários, contas correntes, depósitos, saques e extratos.
 
-Depositar: O usuário pode realizar um depósito na conta, com a validação de que o valor seja positivo.
+## 🚀 Funcionalidades
 
-Sacar: O usuário pode realizar saques com validações de saldo, limite e número máximo de saques permitidos.
+O sistema oferece um menu interativo com as seguintes operações:
 
-Extrato: Exibe um extrato com as transações realizadas e o saldo atual da conta.
+- **[d] Depositar:** Realiza depósitos com validação de valor positivo.
+- **[s] Sacar:** Realiza saques com validações de:
+  - Saldo em conta.
+  - Limite por saque.
+  - Limite diário de saques.
+- **[e] Extrato:** Exibe o histórico detalhado de movimentações e o saldo atual.
+- **[nu] Criar Usuário:** Cadastro de clientes (Nome, CPF, Data de Nascimento e Endereço).
+- **[nc] Criar Conta:** Vincula uma nova conta corrente a um usuário cadastrado.
+- **[lc] Listar Contas:** Exibe todas as contas e seus respectivos titulares.
+- **[q] Sair:** Encerra a aplicação de forma segura.
 
-Criar Usuário: Permite a criação de um novo usuário com nome, CPF, data de nascimento e endereço.
+## 🛠️ Tecnologias e Conceitos
 
-Criar Conta: Criação de uma conta bancária para um usuário existente, com um número de conta e uma agência pré-definidos.
+- **Linguagem:** Python 3.x
+- **Paradigma:** Programação Funcional (Separação de lógica em funções independentes).
+- **Tratamento de Dados:** Uso de listas e dicionários para persistência em memória.
+- **Validações:** Regras de negócio aplicadas via argumentos posicionais e nomeados (`/` e `*`).
 
-Listar Contas: Exibe todas as contas criadas, com informações como número da conta, agência e titular.
+## 💻 Como executar o script
 
-Requisitos
-Python 3.x
+Certifique-se de ter o Python instalado.
 
-Como usar
-Execute o código em um ambiente Python.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/KxuePereira/DIO-Projeto-Banc-rio.git
+   ```
+2. No terminal, execute:
+   ```bash
+   python BancarioOTM.py
+   ```
 
-O menu principal será exibido com as opções disponíveis. O usuário pode digitar a letra correspondente à operação desejada.
+## 🧠 Destaques da Otimização
 
-Para cada operação, você será solicitado a fornecer informações, como valores de depósito ou saque, e dados do usuário (nome, CPF, etc).
+Diferente de uma versão básica, este código (`BancarioOTM.py`) inclui:
+- **Refatoração em Funções:** Cada operação tem sua própria função com parâmetros específicos.
+- **Validadores Python:** Uso de parâmetros *keyword-only* e *positional-only* para maior segurança na chamada das funções.
+- **Tratamento de Erros:** Implementação de `try/except` para lidar com entradas inválidas do usuário.
+- **Correção de Persistência:** Ajuste no retorno do contador de saques para garantir que o limite diário funcione corretamente.
 
-As operações de depósito, saque e extrato são realizadas para uma conta específica de um usuário.
-
-Exemplo de uso
-Depositar: Digite d e informe o valor para realizar um depósito.
-
-Sacar: Digite s e informe o valor do saque. O sistema valida se o saldo é suficiente, se o limite é excedido ou se o número de saques foi atingido.
-
-Extrato: Digite e para exibir o extrato de sua conta.
-
-Criar Usuário: Digite nu para adicionar um novo usuário ao sistema.
-
-Criar Conta: Digite nc para criar uma nova conta bancária para um usuário.
-
-Listar Contas: Digite lc para ver todas as contas criadas.
-
-Sair: Digite q para sair do sistema.
-
-Estrutura do Código
-O sistema é estruturado da seguinte forma:
-
-Funções principais: Funções como depositar, sacar, exibir_extrato, criar_usuario, criar_conta, listar_contas e o menu são responsáveis pela execução das operações.
-
-Validações: Existem diversas validações, como verificar o saldo suficiente para saques, limite de saques por dia e validade de valores informados para as transações.
-
-Usuários e Contas: São mantidos registros de usuários e contas em listas, permitindo a consulta e interação com os dados.
-
-Como Funciona
-O usuário pode criar contas e usuários, inserindo dados pessoais.
-
-O sistema permite realizar transações de depósito e saque, com validação de regras de negócio (como limites de saque e saldo).
-
-O extrato exibe as transações realizadas até o momento, juntamente com o saldo da conta.
-
-O sistema oferece um menu interativo para facilitar a navegação.
-
-Conclusão
-Esse projeto é uma simulação simples de operações bancárias, ideal para aprender como lidar com operações financeiras, validações e manipulação de dados em Python. Ele pode ser expandido para incluir funcionalidades adicionais, como transferência entre contas, cálculo de juros, e outros tipos de contas bancárias.
+## 👨‍💻 Autor
+- **Kauê Vitor Pereira Santos**
+- Desenvolvido como projeto prático no Bootcamp da DIO.
