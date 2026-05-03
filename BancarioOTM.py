@@ -2,7 +2,7 @@ import textwrap
 
 
 def menu():
-    menu = """\n
+    menu_str = """\n
     ================ MENU ================
     [d]\tDepositar
     [s]\tSacar
@@ -12,7 +12,7 @@ def menu():
     [nu]\tNovo usuário
     [q]\tSair
     => """
-    return input(textwrap.dedent(menu))
+    return input(textwrap.dedent(menu_str))
 
 
 def depositar(saldo, valor, extrato, /):
@@ -49,7 +49,7 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques):
     else:
         print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
 
-    return saldo, extrato
+    return saldo, extrato, numero_saques
 
 
 def exibir_extrato(saldo, /, *, extrato):
@@ -73,7 +73,7 @@ def criar_usuario(usuarios):
 
     usuarios.append({"nome": nome, "data_nascimento": data_nascimento, "cpf": cpf, "endereco": endereco})
 
-    print("=== Usuário criado com sucesso! ===")
+    print("\n=== Usuário criado com sucesso! ===")
 
 
 def filtrar_usuario(cpf, usuarios):
@@ -90,9 +90,14 @@ def criar_conta(agencia, numero_conta, usuarios):
         return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
 
     print("\n@@@ Usuário não encontrado, fluxo de criação de conta encerrado! @@@")
+    return None
 
 
 def listar_contas(contas):
+    if not contas:
+        print("\n@@@ Nenhuma conta cadastrada! @@@")
+        return
+
     for conta in contas:
         linha = f"""\
             Agência:\t{conta['agencia']}
@@ -118,21 +123,25 @@ def main():
         opcao = menu()
 
         if opcao == "d":
-            valor = float(input("Informe o valor do depósito: "))
-
-            saldo, extrato = depositar(saldo, valor, extrato)
+            try:
+                valor = float(input("Informe o valor do depósito: "))
+                saldo, extrato = depositar(saldo, valor, extrato)
+            except ValueError:
+                print("\n@@@ Operação falhou! Valor informado é inválido. @@@")
 
         elif opcao == "s":
-            valor = float(input("Informe o valor do saque: "))
-
-            saldo, extrato = sacar(
-                saldo=saldo,
-                valor=valor,
-                extrato=extrato,
-                limite=limite,
-                numero_saques=numero_saques,
-                limite_saques=LIMITE_SAQUES,
-            )
+            try:
+                valor = float(input("Informe o valor do saque: "))
+                saldo, extrato, numero_saques = sacar(
+                    saldo=saldo,
+                    valor=valor,
+                    extrato=extrato,
+                    limite=limite,
+                    numero_saques=numero_saques,
+                    limite_saques=LIMITE_SAQUES,
+                )
+            except ValueError:
+                print("\n@@@ Operação falhou! Valor informado é inválido. @@@")
 
         elif opcao == "e":
             exibir_extrato(saldo, extrato=extrato)
@@ -151,10 +160,12 @@ def main():
             listar_contas(contas)
 
         elif opcao == "q":
+            print("\n=== Obrigado por utilizar o sistema bancário! ===")
             break
 
         else:
-            print("Operação inválida, por favor selecione novamente a operação desejada.")
+            print("\n@@@ Operação inválida, por favor selecione novamente a operação desejada. @@@")
 
 
-main()
+if __name__ == "__main__":
+    main()
